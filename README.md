@@ -6,6 +6,8 @@ Utilizes the [Crossref API](https://api.crossref.org/) to turn a list of [DOI](h
 
 ## How to Use
 
+#### Preliminaries
+
 Define a way to get a list of DOIs into the `build.py` script. A simple way is to have a `dois.json` file and have python read it directly. This is the method assumed and currently coded in `build.py`, but of course other methods can work--read a plain text file, query a database, hit an API endpoint, etc.
 
 Once the DOIs are in the `dois` variable, we define a Library instance, build the library (contains Publication objects), and write it to a JSON file, specified by the `PUBLICATIONS_FILE` variable.
@@ -16,20 +18,32 @@ library.build(dois)
 library.write(PUBLICATIONS_FILE)
 ```
 
+#### Execution
+
+Once a method for reading DOIs list is in working order, run `$ python build.py` in the root directory.
+
 ## Example
 
-Read a file, such as the following, to ingest a list of DOIs.
+Start with a file, say `dois.json, consisting of a list of DOIs.
 
-```json
+```bash
+$ cat dois.json
 [
   "10.5479/sil.52126.39088015628399",
   "10.1037/13681-000"
 ]
 ```
 
-Output a list of publication objects, like the following.
+Build and write the publication metadata JSON file.
 
-```json
+```bash
+$ python build.py
+```
+
+Then the publication metadata JSON file, say `library.json`, that resembles the following is generated and resides in the same directory.
+
+```bash
+$ cat library.json
 [
   {
     "doi": "10.5479/sil.52126.39088015628399",
